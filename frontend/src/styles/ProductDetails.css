@@ -1,0 +1,30 @@
+.product-details {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.product-details img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
+
+.product-info {
+  flex: 1;
+  text-align: left;
+}
+
+.price {
+  font-size: 24px;
+  color: #333;
+  margin: 15px 0;
+}
+
+.description {
+  color: #666;
+  margin: 15px 0;
+  line-height: 1.6;
+}

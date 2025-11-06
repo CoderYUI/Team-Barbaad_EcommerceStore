@@ -1,0 +1,133 @@
+.navbar {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #333;
+}
+
+.cart-icon-container {
+  position: relative;
+  padding: 8px;
+}
+
+.cart-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s;
+}
+
+.cart-icon:hover {
+  transform: scale(1.1);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff4444;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.cart-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.cart-icon.has-items .cart-svg {
+  color: #4CAF50;
+}
+
+.nav-items {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.track-icon-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.track-order-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.track-icon {
+  color: #333;
+}
+
+.track-order-link:hover {
+  color: #007bff;
+}
+
+.track-order-link:hover .track-icon {
+  color: #007bff;
+}
+
+.track-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  margin-right: 20px;
+}
+
+.track-icon-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.track-icon {
+  color: #333;
+}
+
+.track-link:hover {
+  color: #007bff;
+}
+
+.track-link:hover .track-icon {
+  color: #007bff;
+}
