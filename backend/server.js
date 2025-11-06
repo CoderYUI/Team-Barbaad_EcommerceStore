@@ -9,29 +9,41 @@ dotenv.config();
 
 const app = express();
 
-// Updated CORS configuration with deployed URL
+// Updated CORS configuration
 app.use(cors({
-  origin: [
-    process.env.FRONTEND_URL,
-    'https://team-barbaad-ecommerce-store.vercel.app',
-    'https://team-barbaad-ecommerce-store.vercel.app/'
-  ],
+  origin: ['http://localhost:5173', 'https://team-barbaad-ecommerce-store.vercel.app'],
   methods: ['GET', 'POST', 'OPTIONS'],
   credentials: true,
-  optionsSuccessStatus: 204,
-  allowedHeaders: ['Content-Type', 'Authorization']
+  optionsSuccessStatus: 204
 }));
 
+// Remove the origin check middleware since CORS handles it
 app.use(express.json());
 
-// Request logging middleware with origin check
+// Better request logging
 app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (origin && origin !== process.env.FRONTEND_URL) {
-    return res.status(403).json({ message: 'Unauthorized origin' });
-  }
-  console.log(`${req.method} ${req.url} from ${origin}`);
+  const start = Date.now();
+  res.on('finish', () => {
+    const duration = Date.now() - start;
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} ${res.statusCode} ${duration}ms`);
+  });
   next();
+});
+
+// Add health check endpoint
+app.get('/healthcheck', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
+// Warmup endpoint
+app.get('/warmup', async (req, res) => {
+  try {
+    // Test database connection
+    await mongoose.connection.db.admin().ping();
+    res.status(200).json({ status: 'warmed up' });
+  } catch (error) {
+    res.status(500).json({ status: 'error', message: error.message });
+  }
 });
 
 // MongoDB connection

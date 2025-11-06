@@ -14,6 +14,20 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 router.post('/', async (req, res) => {
   try {
     const { message, context } = req.body;
+
+    // Validate request body
+    if (!message) {
+      return res.status(400).json({ 
+        response: "Message is required" 
+      });
+    }
+
+    // Ensure context exists
+    const chatContext = context || {
+      products: [],
+      previousMessages: []
+    };
+
     const lowerMessage = message.toLowerCase();
 
     // Enhanced phone number detection - matches 10 digit numbers
@@ -116,9 +130,9 @@ Provide a helpful response in under 50 words. Focus on:
       });
     }
   } catch (error) {
-    console.error('Route Error:', error);
+    console.error('[Chat Error]', error);
     res.status(500).json({ 
-      response: "Sorry, I'm having trouble processing your request. Please try again." 
+      response: "I apologize, but I'm having trouble processing your request. Please try again." 
     });
   }
 });
