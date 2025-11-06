@@ -9,12 +9,17 @@ dotenv.config();
 
 const app = express();
 
-// CORS configuration with environment variable
+// Updated CORS configuration with deployed URL
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
-  methods: ['GET', 'POST'],
+  origin: [
+    process.env.FRONTEND_URL,
+    'https://team-barbaad-ecommerce-store.vercel.app',
+    'https://team-barbaad-ecommerce-store.vercel.app/'
+  ],
+  methods: ['GET', 'POST', 'OPTIONS'],
   credentials: true,
-  optionsSuccessStatus: 204
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
